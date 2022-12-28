@@ -1,6 +1,6 @@
 import { Button, Input, Select } from '@chakra-ui/react';
 import ToggleColorMode from './components/ToggleColorMode';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Modal,
   ModalOverlay,
@@ -22,7 +22,15 @@ function App() {
   const [chain, setChain] = useState('eth');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  const [showGif, setShowGif] = useState(true);
+
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  useEffect(() => {
+    setInterval(() => {
+      setShowGif(!showGif);
+    }, 30000);
+  }, [showGif]);
 
   const getModalContent = () => {
     switch (modalContent) {
@@ -258,7 +266,6 @@ function App() {
       setIsLoggedIn(true);
       return true;
     }
-    
   };
 
   const getNativeBalanceByWallet = async () => {
@@ -287,7 +294,7 @@ function App() {
     const data = await response.json();
     alert('done (check console)');
     console.log(data);
-  };//
+  }; //
 
   const getNativeTxByWallet = async () => {
     const response = await fetch(`${BASE_URL}/${contractAddress}?chain=${chain}`, {
@@ -395,6 +402,14 @@ function App() {
                 Get native transactions by wallet
               </Button>
             </div>
+            <img
+              width="300px"
+              height="300px"
+              src="https://media.giphy.com/media/fem2uTTbZSf2UayVxQ/giphy.gif"
+              style={{
+                display: showGif ? 'block' : 'none',
+              }}
+            />
           </div>
         </>
       )}
