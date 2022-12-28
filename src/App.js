@@ -286,7 +286,7 @@ function App() {
     const data = await response.json();
     alert('done (check console)');
     console.log(data);
-  };
+  };//
 
   const getNativeTxByWallet = async () => {
     const response = await fetch(`${BASE_URL}/${contractAddress}?chain=${chain}`, {
