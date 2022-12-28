@@ -256,8 +256,9 @@ function App() {
       setJwt(localStorage.getItem('jwt'));
       setApiKey(localStorage.getItem('apiKey'));
       setIsLoggedIn(true);
+      return true;
     }
-    return true;
+    
   };
 
   const getNativeBalanceByWallet = async () => {
